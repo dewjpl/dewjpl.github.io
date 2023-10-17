@@ -24,6 +24,19 @@ function App() {
 			.catch((error) => console.error("Error sending data:", error));
 	};
 
+	const deleteDataFromApi = (id) => {
+		fetch(
+			`https://652e45d00b8d8ddac0b115eb.mockapi.io/sciagi/v1/sciagtxt/${id}`,
+			{
+				method: "DELETE",
+			}
+		)
+			.then(() => {
+				fetchDataFromApi();
+			})
+			.catch((error) => console.error("Error deleting data:", error));
+	};
+
 	const fetchDataFromApi = () => {
 		fetch("https://652e45d00b8d8ddac0b115eb.mockapi.io/sciagi/v1/sciagtxt")
 			.then((response) => response.json())
@@ -48,7 +61,12 @@ function App() {
 			<h2>Data from API:</h2>
 			<ul>
 				{Array.isArray(dataFromApi) &&
-					dataFromApi.map((item) => <li key={item.id}>{item.text}</li>)}
+					dataFromApi.map((item) => (
+						<li key={item.id}>
+							{item.text}
+							<button onClick={() => deleteDataFromApi(item.id)}>Delete</button>
+						</li>
+					))}
 			</ul>
 		</div>
 	);
