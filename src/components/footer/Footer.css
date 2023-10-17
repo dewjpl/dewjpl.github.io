@@ -1,0 +1,10 @@
+.footer {
+    background: #424242;
+}
+.footer h3 {
+    color: white;
+}
+.footer h3 span {
+    font-weight: 100;
+    font-size: 18px;
+}
